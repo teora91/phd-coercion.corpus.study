@@ -17,6 +17,8 @@
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 % \usepackage{gb4e}
 \usepackage{langsci-gb4e}
+\usepackage{multirow} % for creating multiple rows
+\usepackage{capt-of}
 
 
 % \noautomath % solves the issue with gb4e incompatibility!
@@ -747,10 +749,12 @@ med is more focused introducing a subset of a bigger event or a repetition. The 
 % strong presence of modo and mezzo. check in comments2 - faccio fatica a volte a distinguere mezzo da un entità vera. 
 
 % --------------
-The continuation verb \emph{fortsette} emerges as the third most frequent verbs among the five aspectual verbs. In the first step of the analysis we get a general overview of the POS distribution after the verb. From Table~\ref{tab:fortsette_pos} we can notice that prepositions are the most predominant part-of-speech, with approximately one third of the entire sub-sample (14,900 sentences) in the corpus. Ranked second in frequency are infinitival clauses, covering almost 20\% of relative frequency (8800 instances), while nouns are in the third place with 14\% of relative frequency (6402.   
+The continuation verb \emph{fortsette} emerges as the third most frequent verbs among the five aspectual verbs. In the first step of the analysis we get a general quantitative overview of the POS distribution found after the verb. From Table~\ref{tab:fortsette_pos} shows that prepositions are the most predominant part-of-speech, with approximately one third of the entire sub-sample (14,900 sentences) in the corpus. Ranked second in frequency are infinitival clauses, covering almost 20\% of relative frequency (8800 instances), while nouns are in the third place with 14\% of relative frequency (6402 instances). 
 
-\begin{table}[]
-    \centering
+\vspace{1cm}
+
+\begin{minipage}{.3\textwidth}
+  \centering
     \begin{tabular}{llrr}
     \toprule
     {} & W1\_UPOS &   VERB &  REL.FREQ \\
@@ -765,10 +769,31 @@ The continuation verb \emph{fortsette} emerges as the third most frequent verbs 
     1 &     DET &   1000 &  0.022340 \\
     \bottomrule
     \end{tabular}
-    \caption{Caption}
-    \label{tab:fortsette_pos}
-\end{table}
+\captionof{table}{First Table}
+\label{tab:fortsette_POS}
+    \end{minipage}%
+\hfill
+\begin{minipage}{.5\textwidth}
+  \centering
+    \begin{tabular}{lll}
+    \toprule
+    \multicolumn{3}{c}{Fortsette}  \\
+    
+          & agentive & no agentive \\
+    \midrule    
+    på    &  213(0.014;0.005)        &  734(0.05;0.02)           \\
+    med   & 795(0.05;0.02)  & 1767(0.12;0.04)           \\
+    nouns &  1010(0.16;0.02)         &  465(0.07;0.01)          
+    \end{tabular}
+  \captionof{table}{First Table}
+ \label{tab:fortsette_agentive}
 
+\end{minipage}
+
+\vspace{1cm}
+
+
+Comparing the distribution of 
 
 
 % -------------------
@@ -818,3 +843,8 @@ difficile trovare una cosa simile con il verbo avslutte.
 CONCLUSIONE:
 FROM VERSPOOR:
 What is strongly suggested by the data introduced in the previous section is that the metonymic construction is only used with the aspectual verbs begin and finish if the intended event is a strong default associated with the noun phrase. vorrei usare questa frase per idicare una tendenza ad utilizzare PP con i verbi di iniziazione. Un possibile utilizzo pare possa esserci anche con NP anche se non è possibile notarlo qua. Può darsi che la marca preposizionale sia utikizzata per dare più enfasi all'evento.  mentre senza non sarebbe possibile. 
+
+
+
+%APPENDIX:
+% -creation of table of distribution of ADPs (and also single prepositions) and NOUNS across verbs. 
