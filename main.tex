@@ -98,12 +98,15 @@
 \subsection{Frequency of Complement Coercion} % crossling.
 One of the main concern of the current study is the importance of occurrence frequency of complement coercion. 
 Despite a rich presence of literature concerning this phenomenon, there exists a noticeable research gap concerning the frequency of its occurrence, which has been addressed only in a limited set of empirical and cross-linguistic researches. \textcite{shutova_logical_2009}, for example, asserts from the analysis of the British National Corpus (BNC) made by \textcite{verspoor_conventionality-governed_1997} a high occurrence of logical metonymy in English, especially when combined with the aspectual verb \emph{finish}. In contrast to the claim made by the authors, the results of the corpus analysis present a different overview. Considering the whole corpus analysis of BNC\footnote{\textcite{verspoor_conventionality-governed_1997} analyzed also the Lancaster-Oslo-Bergen Corpus (LOB), but due to its small size},  
-\textcite{verspoor_conventionality-governed_1997} could sample less than 5,000 sentences containing the aspectual verb \emph{begin} combined with a noun phrase as argument as plausible candidate for complement coercione. However, only 3.67\% (about 164 sentences) of these instances could be considered metonymic. A higher occurrence was instead found with sentences combined with the verb \emph{finish} followed by a NP, with 2,799 instances, when considering a sample of 11,072 candidate sentences. %bisogna dire che in effetti la possibilità di un'alta frequenza è possibile ma è solo ristretta ad un grupppo di verbi - e non mi stupisce che il verbo finire pare sia quello piu frequente. Vedi spalek Ma c'è anche da considrare che logical metonymy occorre anche in altri verbi e a quanto pare, se consideriamo il verbo begin non abbamo una distribuzione eequilibrata di istanze con logmeto.
+\textcite{verspoor_conventionality-governed_1997} could sample less than 5,000 sentences containing the aspectual verb \emph{begin} combined with a noun phrase as argument as plausible candidate for complement coercion. However, only 3.67\% (about 164 sentences) of these instances could be considered metonymic. A higher occurrence was instead found with sentences combined with the verb \emph{finish} followed by a NP, with 2,799 instances, when considering a sample of 11,072 candidate sentences. 
+%bisogna dire che in effetti la possibilità di un'alta frequenza è possibile ma è solo ristretta ad un grupppo di verbi - e non mi stupisce che il verbo finire pare sia quello piu frequente. Vedi spalek Ma c'è anche da considrare che logical metonymy occorre anche in altri verbi e a quanto pare, se consideriamo il verbo begin non abbamo una distribuzione eequilibrata di istanze con logmeto.
 
 \section{Methods}
 \subsection{Corpora}
 %tabelle e grafici prendi spunto su paper reporting verbs in court judgement-pdf
-To provide a in-depth perspective on plausible candidates of coercion sentences and a comprehensive idea about how regular their occurrence is, we collected data from four distinct corpora, three of which are speech-corpora and one is a text corpus. The rational behind collecting more multiple types of corpora is to investigate whether complement coercion is a more prevalent in oral or written language context. Furthermore, the main focus of our work will be addressed especially to the analysis of the NCC corpus. The reason is not only important because of its noticeable size, but, this corpus served as training data for some of the large language models. The choice is motivated with aim to understand not only the prevalence of complement coercion among speakers and written text, but also to assess the volume of data including complement coercion large language models are exposed to.
+In order to provide an in-depth perspective on plausible candidates of coercion sentences and a comprehensive idea about how regular their occurrence is, we collected data from four distinct corpora, three of which are speech-corpora and one is a text corpus. The rational behind collecting multiple types of corpora is to investigate whether complement coercion is more prevalent in oral or written language context. Furthermore, most part of our work will be addressed to the analysis of the NCC corpus. This is not only because of its noticeable size, but also because this corpus served as training data for some of the large language models that we plan to test in future work (see section 0). As such, this choice will also allow us to assess the volume of data including complement coercion that large language models are exposed to. 
+%spiegare nell'introduzione che vigliamo allenare dei LLM per fare dei tasks. Potresti scrivere tra parentesi see section 0. 
+
 In this section we provide a brief overview of the corpora analyzed:
 
 %noreference for the BB corpus! Just a link
@@ -133,12 +136,14 @@ The NCC corpus includes text from different languages, including the Norwegian v
 \paragraph{Sentence Extraction}
 The first step of this corpus study involves the retrieval of all plausible sentences that encompass five aspectual verbs such as \textit{begynne}, \textit{starte}, \textit{fortsette}, \textit{avslutte}, and \textit{ende}. 
 To accomplish this, we leverage Stanza Pipeline \parencite{qi_stanza_2020} and spaCy \parencite{honnibal_spacy_2017}, two natural language processing tools that offered robust solutions for tokenization, part-of-speech tagging, and dependency parsing. To optimize computational efficiency, especially when dealing with the considerable size of the NCC corpus, the extraction process was further divided into two distinct phases. Initially, for every article, or raw text line in case of speech corpora, a sentence tokenizer detected individual sentences. Subsequently, regular expression rules were applied to select only those sentences that contained the specified aspectual verbs. 
-A drawback of this method is the higher recall and lower precicion in detection, retrieving undesired sentences, such as cases including non-verbs (e.g., verbal nouns \textit{begynnelsen} 'the begin' instead of just the verb \textit{begynne}). This method, on the other hand, ensured a much more scaled sample for the successive sentence filtering. Before being accepted, a language detector was employed for each sentence in order to ensure the selected sentences are written only in Bokmål, avoiding similar languages like Nynorsk and Danish\footnote{The NCC Corpus also incoroporates other (even non-scandinavian) languages, such as French, German, Spanish, etc. For further information see the \href{https://huggingface.co/datasets/NbAiLab/NCC}{HuggingFace Page}}.\\
-The next step is fine-grain the research by exclusively selecting only syntactic canonical sentences which adhere the standard word order and syntactic rules in Norwegian, which in this case is SVO V2 \parencite[pp. 858-862]{faarlund_norsk_1997}. In order to find canonical sentences, NLP tools such ad part-of-speech (POS) tagger and dependency parser were employed. The primary goal was to pinpoint the aspectual verb as the root of the sentence, along its subject (nsubj). It was essential to maintain the correct word order, including only sentences where the subject precedes the main verb. The data obtained by dependency parsing is additionally filtered by selecting only instances considered as potential candidates for coercion. In line with previous remarks in Section X, the sole form of composition involves aspectual verbs combined either with NPs or PPs. Specifically, among prepositional phrases, the instance selection  will be done only on instances involving the prepositions \emph{på} and \emph{med}. 
+A drawback of this method is the higher recall and lower precision in detection, retrieving undesired sentences, such as cases including non-verbs (e.g., verbal nouns \textit{begynnelsen} 'the begin' instead of just the verb \textit{begynne}). This method, on the other hand, ensured a much more scaled sample for the successive sentence filtering. Before being accepted, a language detector was employed for each sentence in order to ensure the selected sentences are written only in Bokmål, avoiding similar languages like Nynorsk and Danish\footnote{The NCC Corpus also incoroporates other (even non-scandinavian) languages, such as French, German, Spanish, etc. For further information see the \href{https://huggingface.co/datasets/NbAiLab/NCC}{HuggingFace Page}}.\\
+The next step is fine-grain the research by exclusively selecting only syntactic canonical sentences which adhere the standard word order and syntactic rules in Norwegian, which in this case is SVO V2 \parencite[pp. 858-862]{faarlund_norsk_1997}. In order to find canonical sentences, NLP tools such as part-of-speech (POS) tagger and dependency parser were employed. The primary goal was to pinpoint the aspectual verb as the root of the sentence, along its subject (nsubj). It was essential to maintain the correct word order, including only sentences where the subject precedes the main verb. The data obtained by dependency parsing is additionally filtered by selecting only instances considered as potential candidates for coercion. In line with previous remarks in Section X, the sole form of composition involves aspectual verbs combined either with NPs or PPs. Specifically, among prepositional phrases, the sentence selection  will be done only on sentences involving the prepositions \emph{på} and \emph{med}. 
 %some text cleaning also performed
 
 \paragraph{Sentence Annotation}
-In order to refine the selection process, the second step involved a qualitative sentence annotation, identifying all candidate coercion sentences. Sentences that 
+In order to refine the selection process, the second step involved a qualitative sentence annotation, identifying all candidate coercion sentences. 
+Agentive subjects
+% Siccome coercion avviene con soggetti agentivevi ,un ulteriore analisi prevede la distinzione tra frasi con sogggetti agentivi e non. Solo il primo gruppo di frasi verranno tenuti in considerazione per l'analisi.
 
 
 This part was conducted by using four different classes:
@@ -147,7 +152,7 @@ This part was conducted by using four different classes:
     \item \textit{temp}: the constituent corresponds to a temporal denotation and therefore it is not considered an adjunct. 
     \item \textit{loc}: the constituent denotes a locative complement or adjuncts.  Bjørn Helge Riise startet på Norges midtbane da VM-kvalifiseringen ble innledet med tap borte mot Island fredag. Bjørn Helge Riise started in Norway's midfield as they opened their World Cup qualifying campaign with a loss away to Iceland on Friday.
     \item \textit{entity}: the constituent is identified as  an entity-denoting argument.
-    \item \textit{event}: the constituent correspond to event-denoting argument.
+    \item \textit{event}: the constituent corresponds to event-denoting argument.
 \end{itemize}
 As we can notice, coercion is only triggered by the 'entity' class whereas other categories do represent other semantic instances, thereby excluding them from being considered as candidates for our analysis. The purpose of using four different classes is not only gaining a deeper understanding of complement coercion but also to obtain a better insight of the role of aspectual verbs in Norwegian in terms of compositionality. Since all the selected corpora were basically raw text with no particular semantic information, the entire analysis will be carried out manually. 
 
@@ -158,13 +163,13 @@ As we can notice, coercion is only triggered by the 'entity' class whereas other
 \paragraph{Selection of entity-denoting arguments.} The target sentences must be selected based on the semantic type of the argument. As we already know, complement coercion occurs with the co-composition of an aspectual verb and an argument of entity type. For that reason, the last step of data extraction implies a subsampling of sentences with entity-denoting argument and further semantic analysis is done with the objective to identify cases of complement coercion. 
 %problem with definition of entity
 %selection of transitive sentences wirth animated subjects 
-One challenge encountered while working on entity classification was the difficulty in establishing clear guidelines for defining entities that could cause complement coercion, since there is not a precise universal definition for what constitutes an entity. In the analysis mentioned in \textcite{rud_covert_2011} and \textcite{zarcone_logical_2012}, for example, the author opted for sampling artifact objects, in the sense of physical and tangible %and digital?
+A challenge encountered while working on entity classification was the difficulty in establishing clear guidelines for defining entities that could cause complement coercion, since there is not a precise universal definition for what constitutes an entity. In the analysis mentioned in \textcite{rud_covert_2011} and \textcite{zarcone_logical_2012}, for example, the author opted for sampling artifact objects, in the sense of physical and tangible %and digital?
 items(?), excluding entities with ambiguous denotation with no clear distinction between entity and event reading. % e.g., cigarettes, letters
 %incorrectly extracted sentences removed, maybe due to some error. 
 % Metaphorical uses were excluded. 
 \textcite{verspoor_conventionality-governed_1997}, on the other hand, does not explicitly specify any
 entity selection for her research. The intention of the author was collecting sentences with aspectual verbs and non-VP constituents that could be potentially metonymic, only excluding some cases where the sentences were events, entailed temporal denotation.
-However, relying solely on artifacts can be limited, since also some more abstract nouns can also interpolate an event. An example can be the noun 'story', since, due to its polysemy, it can also refer to facts that can typically be read, written or told. % mention that a list will be shown somewhere.
+However, relying solely on artifacts can be limited, since also some more abstract nouns can interpolate an event. An example can be the noun 'story', since, due to its polysemy, it can also refer to facts that can typically be read, written or told. % mention that a list will be shown somewhere.
 
 A particular attention should also be given to instances where the verb argument may consist of an entity  but it cannot be considered coercive:
 \begin{itemize}
@@ -299,14 +304,14 @@ Conversely, in the scenario where the aforementioned lessons are intended as 'gi
 % both aan and methave inherent properties nothing to do with logmet, which explain why prep objs are more often used in logmeto constructions.  Both suitable with nouns, beginnen met als o used in constructions with two nouns to express that event start with another event.  begunnen aan, activity is already brought into mind and the syntactic form directly indicates that the combination with a noun referring to a concrete entity has to be interpreted metonymycally. In the case of beginnen met with agentive subject the specific meaning aspect of prep object helps us to undertsand the intended actibity: the event that is needed for a full interpretation must be some action related to other actions in context. 
 %%% Marie begynte med å lese boken. la preposiione med non introduce alcun fenomeno di metonimia logica. Invece con la preposizione paa si puø notare questa cosa. Tanto che una costruzione sintattica infinitiva non e' possibile. PAre andare nella stessa direzione di Jespeer. MA QUESTO va bene? HO visto che su google begynne på å, esistono alcune espressioni ma sono pochissimi!!!! potrebbe andare bene? Mi pare di no!  la preposizione på potrebbe indicare un+espressione di volonta' di iniziare qualcosa mentre NP no. Il fatto che ci sia med lqa costruzione sopra citata pare ancora valida inoltre indica anche quella una non intenzione ,a si vuole di piu indicare una volonta nell+iniziare una serie di cose partendo con quella che si esprime come argomento del verbo.
 \section{Results}
-To begin with, a comprehensive distribution of the aspectual verbs in the NCC corpus is shown in Table~\ref{frequency_aspectual_verbs}, specifically highlighting the absolute frequency of the sentences containing the aspectual verbs as main verbs that satisfies the criteria mentioned in the previous section. The relative frequency (Rel. Freq,) indicated from the data refers to the proportion of occurrences of the verbs relative to all the occurrences of the aspectual verbs in the sample. 
+To begin with, a comprehensive distribution of the aspectual verbs in the NCC corpus is shown in Table~\ref{frequency_aspectual_verbs}, specifically highlighting the absolute frequency (Raw Freq.) of the sentences containing the aspectual verbs as main verbs that satisfy the criteria mentioned in the previous section. The relative frequency (Rel. Freq,) indicated from the data refers to the proportion of occurrences of each verb relative to all the aspectual verbs in the sample. 
 \begin{table}[h!]
 \begin{center}    
 \caption{Frequency of the aspectual verbs in the NCC corpus. }
 \label{frequency_aspectual_verbs}
 \begin{tabular}{lcr}
 \toprule\toprule
-Verb &    Freq. (raw) &  Rel. Freq.\\
+Verb &    Raw Freq. &  Rel. Freq.\\
 \hline
  starte &  107285 &               0.434387  \\
 begynne &   65186 &               0.263932  \\
@@ -321,55 +326,48 @@ avslutte &   22157 &               0.089712  \\
 
 \end{table}
 
-\noindent The data indicates a noticeable difference in occurrences between verbs. The data reveal that the initiation verbs occur more often than the other verbs: the verb \emph{starte} covers 43\% of the total sample, indicating that it is the most frequent aspectual verb in the NCC corpus among the listed verbs. The verb \emph{begynne}, while not as frequent as the previous verbs, shows a considerable presence in the corpus, with 26\% of relative frequency. Particularly interesting, instead, is the low frequency of the verb \emph{ende} with less than 7600 instances detected and covering only 3\% of the entire sample. In the next section we will go deep into the analysis divided by verb. The results presented as follows: %...section x you do this ...
-
-
-%MANCA TUTTA LA PARTE RELATIVA ALLA SUDDIVISIONE DEI POS TAGS
-
+\noindent The data indicate a noticeable difference in occurrences between verbs. In particular, they reveal that initiation verbs occur more often than the other verbs. First, the verb \emph{starte} covers 43\% of the total sample, indicating that it is the most frequent aspectual verb in the NCC corpus among the listed verbs. Second, the verb \emph{begynne}, while not as frequent as the previous verbs, shows a considerable presence in the corpus, with 26\% of relative frequency. Finally, the frequency of the verb \emph{ende} is much lower, with less than 7,600 instances detected, covering only 3\% of the entire subsample. 
+In the next section we will go deep into the analysis divided by verb types: verbs of initiation (\emph{begynne} and \emph{starte}) in Section~\ref{sec:initiation_verbs}, verb of continuation (\emph{fortsette}) in Section YY, and verbs of conclusion (\emph{avslutte} and \emph{ende}) in Section ZZ.
+In each subsection, we will discuss the syntactic composition of verbs, trying to understand what syntactic categories follow the predicates and how they are distributed. After a quantitative analysis, we will identify sentences that display complement coercion, namely instances where the verb is followed by an entity. 
 %want present a quantitative and qualitative results
 %. Since the corpora investigated vary in size, the normalized frequency per 100,000 words is given in the columns headed (Frequency per 100K words). Normalized frequency reports frequency against a common base of normalization as a proportion of each corpus, (see e.g McEnery and Hardie 2012, 49). 
 
+%include frequency divided by verbs.
+\subsection{Analysis of Initiation Verbs}
+\label{sec:initiation_verbs}
+Table X illustrates a quantitative analysis of word frequencies based on POS tags in the context of both initiation verbs\footnote{For practical reasons, we are not presenting every single tag in the table. Therefore, minor tags are merged into the category "OTHER".}. As for the verb \emph{begynne}, the particle \emph{å} (PART) is one of the most frequent type of words found after the verb, with 24,718 occurrences representing 37\% of the entire sample. Prepositions (ADP) rank as the next prevalent POS, with a frequency of 20,823 occurrences (31\% of relative frequency). Less frequent part-of-speech include nouns (NOUN), with 8\% of relative frequency, and determiners (DET), comprising only 2\%. 
+A slightly different trend can be found in the results of the verb \emph{starte}. Prepositions seem to be the most frequent part-of-speech, with 57,613 instances, covering approximately 53\% of the entire sample. Then, we found 23,531 occurrences of nouns (21\% of relative frequency). Interestingly, the particle \emph{å} assumes here a less prominent role in comparison to its counterpart, with only 843 instances.
 
-%include frequency divided by verbs. 
-\subsection{Coercion and logical metonymy with initiation verbs}
-The preliminary focus of this corpus analysis encompasses the verbs of initiation, such as \emph{begynne} and \emph{starte}. In this subsection, we will discuss the syntactic composition of these two verbs, trying to understand what words follow the predicates and how they are distributed. After a quantitative analysis, we will gain insight into the possible entities identifiable in the corpus sample by semantically analyze the sentences and their plausible induction to coercion.
+Comparing the distribution analysis of both verbs we can assume that there is a compositional variability according to the verb. Notably, Norwegian speakers would apparently tend to introduce mostly infinitive clauses when combined with the predicate \emph{begynne}. The verb \emph{starte}, on the other hand, seems to avoid these compositions, preferring other alternatives such as noun phrases, which are more consistent in the sample. Very interesting is instead a high presence of prepositions in both verbs, which can make good candidate for complement coercion. 
 
-To begin with, Table X illustrates a quantitative analysis of word frequencies based on POS tag in the context of both initiation verbs. For practical reasons, we do not present every single tag in the table, and minor tags are therefore merged into the category "OTHER". Analyzing  the verb \emph{begynne}, the particle \emph{å} (PART) is one of the more frequent type of words found after the verb, with 24,718 occurrencies representing 37\% of the entire sample. Prepositions (ADP) rank as the next prevalent POS, with a frequency of 20,823 occurrences (31\% of relative frequency). Less frequently observed phenomena include noun phrases with minor occurrences of nouns (NOUN), with 8\% of relative frequency and determiners (DET) comprising only 2\%. 
-A slightly different trend can be found in the results of the verb \emph{starte}. Prepositions seem to be the more frequent syntactic category found after the verb, with 57,613 instances covering approximatively 53\% of the entire sample, followed by nouns with 23,531 frequencies (21\% of relative frequncy). Interestingly, the particle \emph{å} assumes here a less prominent role in comparison to its counterpart, with only 843 instances found.
-
-%ADD SCONJ?
-Comparing the distribution analysis of both verbs we can infer that there is a compositional variability according to the verb used with some divergences and some similarities. Figure~\ref{fig:barplot_pos} compare the frequency of POS between verbs. Notably, Norwegian speakers would apparently tend to introduce mostly infinitive clauses when combined with the predicate \emph{begynne}. The verb \emph{starte}, on the other hand, seems to avoid these compositions, preferring other alternatives such as noun phrases, which are more consistent in the sample. Very interesting is instead a high presence of prepositions in both verbs, which can make good candidate for composing complement coercion. 
-
-%table distribution of prepositions of begynne
-% \begin{table}[!]
-%     \centering
-%     \begin{tabular}{lrrrr}
-%         \toprule
-%         \midrule
-%      Prep.   & Freq. & REL.FREQ. Prep & REL.FREQ. Verb \\
-%      \hline
-%      i       & 8162 & 0.391970 & 0.125211 \\
-%      med     & 5774 & 0.277290 & 0.088577 \\
-%      på      & 2886 & 0.138597 & 0.044273 \\
-%      for     & 821 & 0.039428 & 0.012595 \\
-%      etter   & 743 & 0.035682 & 0.011398 \\
-%      ved     & 734 & 0.035249 & 0.011260 \\
-%      før     & 228 & 0.010949 & 0.003498 \\
-%      fra     & 150 & 0.007204 & 0.002301 \\
-%      under   & 135 & 0.006483 & 0.002071 \\
-%      omkring & 134 & 0.006435 & 0.002056 \\     
-                    
-%         \bottomrule
-%     \end{tabular}
-%     \caption{Table Caption Here}
-%     \label{tab:prep_begynne}
-% \end{table}
-
-As our goal is to explore the key elements that may trigger complement coercion, we proceed with an in-depth exploration of preposition distribution, in particular the prepositions \emph{på} and \emph{med}. In order to do this, we will restrict the sample to include only initiation verbs followed by prepositions.
-Table~\ref{tab:prep_begynne} provides the absolute frequency of sentences with the 10 most frequent prepositions that follow the verbs \emph{begynne} and \emph{starte}. 
+As our goal is to explore the key elements that may trigger complement coercion, we will proceed with an in-depth exploration of prepositions' distribution. Then, we will focus only on those instances that are followed by \emph{på} and \emph{med}, which are the most relevant prepositions for our discussion.
+Table~\ref{tab:prep_begynne} provides the absolute frequency of sentences with the 10 most frequent prepositions that follow the verbs \emph{begynne} and \emph{starte}.
 % In addition, the table provides the relative frequency within the subsample of only prepositions for each verb, and a further relative frequency based solely on the verb frequency.
 In addition, the table provides the relative frequency normalized by the total amount of canonical sentences that occur with the corresponding verbs. Comparing the distribution across predicates, we can notice consistent results. 
-The preposition \emph{med} and \emph{på} appear to be the most frequent among others. The former preposition is found in 5,774 instances in begynne, and 10,817 instances with \emph{starte}, with a relative frequency of only 8\% and 10\% respectively. The latter preposition, instead, is less frequent, with 2,866 with \emph{begynne} and 4,933 with \emph{starte}, with only 4.5\% of relative frequency for both verbs. This analysis highlights two important aspects related to the word distributions combined with initiation verbs. Firstly, the preposition that may arise complement coercion seem to be consistent across verbs, demonstrating similar proportions in occurrence between both verbs. Secondly, their occurrence appears to be quite infrequent, covering a low portion of the corpus.   
+The preposition \emph{med} and \emph{på} appear to be the most frequent. The former preposition is found in 5,774 instances in begynne, and 10,817 instances with \emph{starte}, with a relative frequency of only 8\% and 10\% respectively. The latter preposition, instead, is less frequent, with 2,866 with \emph{begynne} and 4,933 with \emph{starte}, with only 4.5\% of relative frequency for both verbs. This analysis highlights two important aspects related to the word distributions combined with initiation verbs. Firstly, the preposition that may arise complement coercion seems to be consistent across verbs, demonstrating similar proportions in occurrence. Secondly, their occurrence appears to be quite infrequent, covering a low portion of the corpus.
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{lrrrr}
+        \toprule
+        \midrule
+     Prep.   & Freq. & REL.FREQ. Prep & REL.FREQ. Verb \\
+     \hline
+     i       & 8162 & 0.391970 & 0.125211 \\
+     med     & 5774 & 0.277290 & 0.088577 \\
+     på      & 2886 & 0.138597 & 0.044273 \\
+     for     & 821 & 0.039428 & 0.012595 \\
+     etter   & 743 & 0.035682 & 0.011398 \\
+     ved     & 734 & 0.035249 & 0.011260 \\
+     før     & 228 & 0.010949 & 0.003498 \\
+     fra     & 150 & 0.007204 & 0.002301 \\
+     under   & 135 & 0.006483 & 0.002071 \\
+     omkring & 134 & 0.006435 & 0.002056 \\     
+                    
+        \bottomrule
+    \end{tabular}
+    \caption{Table Caption Here}
+    \label{tab:prep_begynne}
+\end{table}
 
 
 %paritre a descrivere la differenza in preposizioni paa e med. 
@@ -396,22 +394,8 @@ The preposition \emph{med} and \emph{på} appear to be the most frequent among o
 
 % In summary, the high absolute frequencies of adpositions, nouns, pronouns, particles, and subordinating conjunctions suggest that the verbs "starte" and "begynne" are versatile and are used in diverse syntactic and semantic contexts. Researchers could further investigate specific prepositional phrases, noun phrases, and syntactic structures to gain a more nuanced understanding of how these verbs are employed in Norwegian discourse.
 
-
-%inserire anche la tabella con le frequenze
-\begin{figure}[htp]
-    \centering
-    \includegraphics[width=10cm]{pics/barplot_pos.png}
-    \caption{Comparison of frequency of different words based on their POS between the verbs \emph{begynne} and \emph{starte}.}
-    \label{fig:barplot_pos}
-\end{figure}
-
-\subsubsection{Sentences with prepositional phrases}
-%med: pox avere complemento di compagnia.
-%idea presa da uso di parlanti.
-As previously mentioned the combination of initiation verbs with prepositional phrases may be the key elements for triggering complement coercion, more precisely when the phrase is introduced by the prepositions \emph{på} and \emph{med}. %cit NOT FOUND
-For that reason, the next step of our research is a semantic analysis of sentences based on preposition occurrence. 
-Before introducing the results of the semantic analysis, it is important to point out that complement coercion occurs only in cases where the sentence includes subjects of agentive type.
-\begin{table}[!]
+\subsubsection{Occurrences with \emph{på} and \emph{med}}
+\begin{table}[h!]
     \centering
     \begin{tabular}{lrrrr}
         \toprule
@@ -426,6 +410,10 @@ Before introducing the results of the semantic analysis, it is important to poin
     \caption{Table Caption Here}
     \label{tab:initiation_verbs_agentive_no_agentive}
 \end{table}
+%med: pox avere complemento di compagnia.
+% As previously mentioned, the combination of initiation verbs with prepositional phrases may be the key element for triggering complement coercion, more precisely when the phrase is introduced by the prepositions \emph{på} and \emph{med}. %cit NOT FOUND
+% For that reason, the next step of our research is a semantic analysis of sentences based on preposition occurrence. 
+% Before introducing the results of the semantic analysis, it is important to point out that complement coercion occurs only in cases where the sentence includes subjects of agentive type.
 % 0 & Preposition & agentive? & Sentence & REL.FREQ_ADP & REL.FREQ_VERB \\
 % 7 & på & agentive & 1154 & 0.055419 & 0.017703 \\
 % 9 & på & no agentive & 988 & 0.047448 & 0.015157 \\
@@ -438,16 +426,13 @@ Before introducing the results of the semantic analysis, it is important to poin
 % 6 & på &  no & 1 & 0.000048 & 0.000015 \\
 % From this distribution, it can be inferred that a significant portion of instances involving verbs of initiation involves subjects without clearly specified agents, emphasizing a more passive or indeterminate initiation process. Additionally, the presence of agentive subjects, though less frequent, suggests that there is a noteworthy subset of instances where the initiation is explicitly attributed to an agent or initiator. This nuanced analysis provides valuable insights into the syntactic patterns associated with verbs of initiation and contributes to a deeper understanding of the linguistic structures governing such constructions.
 
-Table~\ref{tab:initiation_verbs_agentive_no_agentive} shows the frequency distribution of subjects in sentences that include initiation verbs as predicate. The values are divided based on the subject type ("agentive" and "non-agentive") and the prepositions "på and "med". Furthermore, the table provides the relative frequencies normalized by the total amount of canonical sentences occurring with the corresponding verbs.
-Resutls reveal that the frequency of sentences containing agentive subjects is relatively low, with 1154 and 1366 annotated instances with the verb \emph{begynne} followed by the prepositions "på" and "med" respectively, and 612 and 1911 for \emph{starte}. Interestingly, the relative frequency score of sentence occurrence with subjects of agentive type is consistently equal or below to 2\%. Only sentences with agentive subjects were taken into account for the semantic analysis.
-% This trend suggests that the occurrence of sentences with agentive subjects is particularly infrequent, and going deeper into the semantic analysis of sentences with agentive subjects the situation is not better. 
-The next stage of the research involves dividing the sentences according to the preposition being held by the aspectual verb. 
-% The first part is dedicated to the analysis of sentences introduced by the preposition på. 
-Table~\ref{tab:semantic_initiation_verbs_paa} shows the occurrence frequency of sentences with initiation verbs combined with prepositional phrases introduced by the prepositions på. From the results, it is clear that one of the primary use of prepositional phrases is to introduce arguments of eventive type, with 241 instances with \emph{begynne} and 84 with \emph{starte}. Furthermore, the preposition \emph{på}, due to its nature to mark locative adjucts (Tungseth, 2008)
-% Tungseth, Mai Ellin (2008). Verbal Prepositions and Argument Structure: Path, Place and Possession in Norwegian, John Benjamins Publishing Company.
-, includes 168 and 282 occurrences. 
+Table~\ref{tab:initiation_verbs_agentive_no_agentive} shows the frequency distribution of \emph{på} and \emph{med} divided by aspectual verbs and based on subject type ("agentive" and "non-agentive"). Furthermore, the table provides the relative frequencies normalized by the total amount of canonical sentences occurring with the corresponding verbs.
+Results reveal that the frequency of sentences containing agentive subjects is relatively low, with 1154 and 1366 annotated instances with the verb \emph{begynne} followed by the prepositions \emph{på} and \emph{med} respectively, and 612 and 1911 for \emph{starte}. Interestingly, the relative frequency of occurrences with agentive subjects is consistently equal or below 2\% for both verbs.
+Since complement coercion occurs only in sentences with agentive subjects, our semantic analysis will focus only on the latter. 
 
-\begin{table}[]
+% This trend suggests that the occurrence of sentences with agentive subjects is particularly infrequent, and going deeper into the semantic analysis of sentences with agentive subjects the situation is not better. 
+
+\begin{table}[h!]
     \centering
     \begin{tabular}{lrrrr}
     labels & freqs\_begynne & REL.FREQ\_VERB\_x & freqs\_starte & REL.FREQ\_VERB\_y \\
@@ -466,8 +451,14 @@ Table~\ref{tab:semantic_initiation_verbs_paa} shows the occurrence frequency of 
     \label{tab:semantic_initiation_verbs_paa}
 \end{table}
 %entity-denoting arguments
-In terms of  sentence frequency including entity-denoting arguments, the table shows a relatively small group of instances, with 170 identified sentences with the verb \emph{begynne} and 84 with \emph{starte}. Among them, only a restricted amount of sentences could be plausible candidates for complement coercion. The verb \emph{begynne} presents 128 instances of coercion, while \emph{starte} includes only 55 sentences. 
-It is interesting to notice from this analysis that the range of entity categories causing complement coercion is restricted, spanning from pure artifacts to less concrete objects. The more frequent entity type in the corpus encompasses text, books, but also, to a minor extent, operas and theses: 
+% The next stage of the research involves dividing the sentences according to the preposition being held by the aspectual verb. 
+% The first part is dedicated to the analysis of sentences introduced by the preposition på. 
+\noindent First, table~\ref{tab:semantic_initiation_verbs_paa} shows the frequencies of sentences with agentive subjects introduced by \emph{på} and classified by the type of argument or adjuct following the preposition. From the results, it is clear that most på-prepositional phrases introduce arguments of eventive type, with 241 instances with \emph{begynne} and 84 with \emph{starte}. Furthermore, 168 occurrences introduce locative adjucts, as we may expect considering that \emph{på} frequently marks locatives in Norwegian (Tungseth, 2008).
+% Tungseth, Mai Ellin (2008). Verbal Prepositions and Argument Structure: Path, Place and Possession in Norwegian, John Benjamins Publishing Company.
+In terms of sentence frequency including entity-denoting arguments, the table shows a relatively small group of instances, with 170 identified sentences with the verb \emph{begynne} and 84 with \emph{starte}. Among them, only a restricted amount of sentences could be plausible candidates for complement coercion. The verb \emph{begynne} presents 128 instances of coercion, while \emph{starte} includes only 55 sentences. It is interesting to notice from this analysis that the range of entity categories causing complement coercion is restricted, spanning from pure artifacts to less concrete objects. An exhaustive list of coercion sentences will be provided in the appendix. %Sentences available in the appendix. 
+We will provide here just a few relevant examples. 
+
+First, the most frequent entity type in the sample encompasses text, books, but also, to a minor extent, operas and theses, as we show in~\ref{sent:initiation_paa_1} and~\ref{sent:initiation_paa_2}. Interestingly, all sentences that are combined with the above mentioned group of entities proposed agentive interpretations of writing text, whereas no telic interpretations were found. Sentence~\ref{sent:initiation_paa_1}, for example, provides the biography of the the Russian writer Dostoevsky. The text suggests that he started writing one of his famous novels at a precise moment of his life. Sentence~\ref{sent:initiation_paa_2}, instead, is an excerpt from a surveillance report from the Norwegian Agency and treats the topic of the Norwegian master's degree program at the University of Østfold. The sentence mentions one of the duties that a master's student must undergo in order to conclude their studies, one of which is writing a thesis. 
 
     \ea \label{sent:initiation_paa_1} %NCC
 
@@ -482,9 +473,21 @@ It is interesting to notice from this analysis that the range of entity categori
          A fulltime-student begins on master-thesis the third semester.\\
     \glt ‘A full-time student begins its master's thesis in the third semester.’
     \z
+    
+Second, particular attention should be given to the term "skole" and its synonyms ("universitet", "ungsomskole", etc.). We are providing an example of such occurrences in~\ref{sent:initiation_skole}:
+        \ea \label{initiation_skole} %NCC
 
-It is interesting to point out that all classified sentences that are combined with this group of entities propose all agentive interepretations of writing text, whereas no telic interpretations were found. Sentence~\ref{sent:initiation_paa_1}, for example, provides the biography of the the Russian writer Dostoevsky. The text suggests that he commenced to write one of his famous novel at a precise moment of his life. Sentence~\ref{sent:initiation_paa_2}, instead, is an excerpt from of a surveillance report from the NOrwegian Agency and treats the topic of the Norwegian master's degree program at the University of Østfold. From the previous context provided in the document, the sentence in the example above mentions one of the duties that a master's student must undergo in order to conclude his/her studies, one of which is the writing of a thesis, that can start only after the third semester. An exhaustive list of coercion sentences will be provided in the appendix. %Sentences available in the appendix
-Other sentences that undergo complement coercion include also less frequent entities that are related to paintings, buildings, drawings, recordings and drinks:
+        \gll En del gutter begynte på universitet i en alder av 14 år.\\
+             One part boys began at university in an age of 14 years.\\
+        \glt ‘Some boys began university at the age of 14.’
+        \z
+The frequency of such sentences is particularly high, especially when introduced by \emph{begynne}, with 469 occurrences. Conversely, sentences with the verb \emph{starte} are infrequent, appearing only 15 times. 
+The question that may arise is whether to treat this examples as displaying an argument of eventive type, locative adjucnts, or classify them as entities denoting complement coercion. In fact, words like "universitet" are polysemic, since they can denote a location, a building or even an event intended as a period of study course at the university.  We will go back to this issue in the discussion section.
+%il fatto che è molto presente questa costruzione ci fa pensare che viene utilizzato in maniera idiosincratica? 
+%two problematics with considereing it as CC phenomenon: traditionally interepretation of entities by changing the  syntactic type of constituent: beginne på boken (PP) - begynne å lese boken (NP) -  beginne på universitet (PP)  - begynne å studere på universitet (PP). Semantically universitet, if finding an interpretation, we do convert the object into a locative. 
+%cosa differente le espressioni per indicare iniziare il lavoro da qualche parte. begynne på Ikea - in ita iniziare da Ikea - non sempre necessario un'interpretazione completa.  
+
+Third, less frequent entities are related to paintings, buildings, drawings, recordings and drinks. An example is showed in~\ref{sent:initiation_paa_3}, where the subject is in the process to paint a portrait. In this case, as in sentence~\ref{sent:initiation_paa_1}, the interpretation of the covert event can be retrieved not only from its surrounding context, but also from world knowledge. 
 %also attend courses.
 
     \ea \label{sent:initiation_paa_3} %NCC
@@ -493,8 +496,8 @@ Other sentences that undergo complement coercion include also less frequent enti
          Da Vinci began on master-piece-the «Mona Lisa» in 1503 or 1504.\\
     \glt ‘Da Vinci began the masterpiece "Mona Lisa" in 1503 or 1504.’
     \z
-From sentence~\ref{sent:initiation_paa_3} it is clear that the subject is in the process to paint a portrait. In this case, as in sentence~\ref{sent:initiation_paa_1}, the interpretation of the covert event can also be retrieved not only from its surrounding context, but world knowledge can play an important role in disambiguating the implicit action in the sentence. 
-In other cases the entity can introduce the beginning of a medical therapy by patients, for example by taking medicine or chemiotherapy.   
+
+Then, the entity can introduce the beginning of a medical therapy by patients, for example by taking medicine or chemiotherapy. In~\ref{sent:initiation_paa_4} we can notice that the event, in contrast to the previous examples, is oriented more to a telic interpretation and not to an agentive one.
 %medicines - telic
     \ea \label{sent:initiation_paa_4} %NCC
 
@@ -503,22 +506,18 @@ In other cases the entity can introduce the beginning of a medical therapy by pa
     \glt ‘Majda (25) started on Levaxin, but she was constantly tired and lethargic.’
     \z
 %songs etc. can also have both interpretations
-Here we can notice that the event, in contrast to the previous examples, is oriented more to a telic interpretation and not to an agentive one.
-Interestingly, the study also reveals the presence of terms related to music song and synonyms (sang, låt, etc.), including both interpretations as sentences X and Y shows.
+Additionally, the study reveals the presence of terms related to music song and synonyms (sang, låt, etc.), including both agentive and telic interpretations, as we show in  8 and 9 respectively. However, it is worth noting that the telic interpretation remains more frequent, whereas the sentence with the agentive interpretation of the entity is particularly rare. % only one found. 
+
     \ea \label{sent:initiation_paa_4} %NCC
 
     \gll Wang Shen begynte på sangen i september 1950, tekst og noter ble offentliggjort den 15. september 1951 i ''Renmin Ribao''.\\
          Wang Shen began on song-the in September 1950, text and notes were published the 15. Septermber 1951 in ''Renmin Ribao''.\\
     \glt ‘Wang Shen started the song in September 1950, lyrics and sheet music were published on September 15, 1951 in ''Renmin Ribao.’
     \z
-It is worth to stress out, however, that the telic interpretation remains more frequent, whereas the sentence with the agentive intepretation of the entity is particularly rare.
-% only one found. 
 
-Less concrete entities that can be considered plausible for occurring complement coercion can be also terms related to study and education (e.g., starting a degree, a bachelor, a PhD, etc.), to oral expression of events (e.g., begin a story, a sentence, a questions, etc.) but also to sports and activities but can be treated somehow as entities (e.g., play ice hockey, guitar etc.).   
-% play/practice sport ---
-% build
-%dance
-\begin{table}[!]
+Finally, less concrete entities that can be considered plausible for occurring complement coercion can be also terms related to study and education (e.g., starting a degree, a bachelor, a PhD, etc.), to oral expression of events (e.g., begin a story, a sentence, a questions, etc.) but also to sports (e.g., play ice hockey, guitar etc.). You can find such instances in the appendix. 
+
+\begin{table}[h!]
     \centering
 \begin{tabular}{llrrrr}
 0 & labels & freqs\_begynne & REL.FREQ\_VERB\_x & freqs\_starte & REL.FREQ\_VERB\_y \\
@@ -537,22 +536,26 @@ Less concrete entities that can be considered plausible for occurring complement
 % 12 & company & nan & nan & 3 & 0.000028 \\
 % 13 & prosjekt & nan & nan & 4 & 0.000037 \\
 \end{tabular}
-    \caption{begynne,starte,på}
+    \caption{begynne,starte,med}
     \label{tab:semantic_initiation_verbs_med}
 \end{table}
 
-Table~\ref{tab:semantic_initiation_verbs_med} shows the frequency of sentence occurrences with initiaion verbs followed by prepositional phrases with \emph{med} and divided by semantic categories. 
-Similar to sentences with initiation verbs combined the preposition \emph{på}, also the preposition \emph{med} can be a marker that usually is employed mainly to introduce arguments of eventive type, finding 688 instances with \emph{begin} and 921 with \emph{starte}. Entity-denoting arguments find a relative high frequency, recording 440 and 695 sentences.
+Let us now present the results for \emph{med}. Table~\ref{tab:semantic_initiation_verbs_med} shows the frequency of sentence occurrences with initiaion verbs followed by the latter preposition and divided by semantic classes. 
+Similar to sentences with initiation verbs combined with the preposition \emph{på}, also the preposition \emph{med} can be a marker of eventive arguments, finding 688 instances with \emph{begin} and 921 with \emph{starte}. Entity-denoting arguments find a relative high frequency, recording 440 and 695 sentences respectively.
 % menzionare il fatto che med pox ex utilizzato per indicare un sotto eveto o ripetitivitæ (citaz), anche citato nella parte teorica. Ma grande fetta di termini identificato come entita non possono essere utilizzati perche' possono introdurre complemento di mezzo, oppure compagnia se entitæ e' un essere umano. 
-From the semantic annotation, we discovered a total of 357 plausible candidates for complement coercion, of which 246 with \emph{begynne} and 111 with \emph{starte}. It is interesting to notice that, similarly to sentences with arguments introduced by the preposition \emph{på}, the marker \emph{med} allows the introduction to aritifacts and objects of everyday use, for instance, objects related to texts, letters, chapters, and theses, with mostly agentive interpretation of the event and only two instances with a telic interpretation:
+From the semantic annotation, we discovered a total of 357 plausible candidates for complement coercion, of which 246 with \emph{begynne} and 111 with \emph{starte}. It is interesting to notice that, similarly to sentences introduced by \emph{på}, the marker \emph{med} can introduce aritifacts and objects of everyday use, for instance texts, letters, chapters, and theses. The event is most frequently of agentive interpretation, whereas only two instances with a telic interpretation were found. An exhaustive list of coercion sentences will be provided in the
+appendix. We will provide here just a few relevant examples. 
+
+First, sentence~\ref{sent:initiation_med_1} is an extraction of a biography about the novelist and filmmaker. The sentence highlights that the subject's career initiates with writing of the mentioned movie, serving as the first step for subsequent cinematic productions in later time.
+
         \ea \label{sent:initiation_med_1} %NCC
 
-        \gll Han begynte med "L'Immortelle"( 1962 ) som vant Louis Delluc-prisen i 1962.\\
+        \gll Han begynte med "L'Immortelle"(1962) som vant Louis Delluc-prisen i 1962.\\
              He began with "L'immortelle"(1962) that won Louis Delluc-price-the in 1962.\\
         \glt ‘He began with "L'Immortelle"(1962) which won the Louis Delluc Award in 1962.’
         \z
 %NB here it seems that med is also used to inglobe the action of reading as a subpart of a bigger event.
-Sentence~\ref{sent:initiation_med_1} is an extraction of a biography about the novelist and filmmaker. The sentence highlights that the subject's career initiates with writing of the mentioned movie, serving as the first step for subsequent cinematic productions in later time.
+
 % novelty food...
 % PAAA vs MED: NOtice the use of med in Sentence~\ref{sent:initiation_med_1}, the focus is more on the fact that the movie is the first of more. The focus is basically not much on the object that is initiated.
         % \ea \label{sent:initiation_med_2} %NCC
@@ -561,13 +564,14 @@ Sentence~\ref{sent:initiation_med_1} is an extraction of a biography about the n
         % \glt ‘The students began with Caloni's Disticba and Aesop's fables, continued with Cicero, Terents and Ovid, and finally read Virgil, Sallust and Horace.’
         % \z
         
-Also the preposition \emph{med} includes entities related to drinks, medicine, painting, sports and, with more frequency, to music songs and instruments. Particularly noteworthy in this corpus subsample is the apparent greater freedom in introducing a wider range of entities, a flexibility not encountered with the use of på, which also justify the presence of more instances with coercion candidates. Significant examples can be found in sentences with food as entities: 
+\noindent Second, the preposition \emph{med} introduces entities related to drinks, medicine, painting, sports and, more frequently, to music songs and instruments. In Sentence~\ref{sent:initiation_med_3} we provide an example of coercion with a food entity. As we can see, the subjects are planning to commence a sort of dining experience with nacho chips as their first meal. Furthermore, the given information  reveals that they will likely continue their dinner with another meal. 
+
         \ea \label{sent:initiation_med_3} %NCC
         \gll Vi begynner med nachochips med aioli og salsa mens vi ser på spisekartet.\\
         We begin with nacho-chips with aioli and salsa while we see on menu-the.\\
         \glt ‘We begin with nacho chips with aioli and salsa while we look at the menu.’
         \z
-Sentence~\ref{sent:initiation_med_3} let us assume that the subjects are planning to commence a sort of dining experience with nacho chips as their first meal. Furthermore, the given information also reveals that they likely continue their dinner with another meal.      
+Particularly noteworthy is the fact that in this subcorpus the preposition \emph{med} introduces a wider range of entities with respect to \emph{på}. This apparent greater freedom could explain why \emph{med} introduces coercion more often. 
 %%%MED
 % NO COERCION;
     % citation = can be considered as part of a subevent, nothing to do with coercion. 
@@ -587,7 +591,7 @@ Sentence~\ref{sent:initiation_med_3} let us assume that the subjects are plannin
     % comments1 found 
     % comments1 company, persona, mezzo; 
     % comments1 quantifier
-\subsubsection{The case of skole}
+% \subsubsection{The case of skole}
 %%%%WITH PAA:
     %some of words that can be considered something like entities are difficult to consider them as coercion.  
     %skole, universitet
@@ -599,30 +603,17 @@ Sentence~\ref{sent:initiation_med_3} let us assume that the subjects are plannin
         %begynne paa NRK - NRK is a place not the entity.WORK
     %NOT ACCEPTED: start contract
     % one sentence with sang is interpreted 
-Particular attention should also be given to the term "skole" and its synonyms ("universitet", "ungsomskole", etc.):
-        \ea \label{initiation_skole} %NCC
-
-        \gll En del gutter begynte på universitet i en alder av 14 år.\\
-             One part boys began at university in an age of 14 years.\\
-        \glt ‘Some boys began university at the age of 14.’
-        \z
-The occurrence frequency of such sentences is particularly high, especially when introduced by \emph{begynne}, with 469 sentences, whereas with the verb \emph{starte} is in comparison infrequent, appearing only 15 times. 
-The combination of the aspectual verb and the phrase "på universitet", even though the university transcends a spacial designation, does not imply only a locative adjunct, but it is also considered an institution, suggesting the act of commencing a period of study course at the university. For that reason, the question that may arise is whether to treat this combination as an argument of eventive type, in the sense of a range of time when a series of sub-events may occur, or classify the word "universitet" as a special case of complement coercion, considering the term as a proper entity.
-%il fatto che è molto presente questa costruzione ci fa pensare che viene utilizzato in maniera idiosincratica? 
-%two problematics with considereing it as CC phenomenon: traditionally interepretation of entities by changing the  syntactic type of constituent: beginne på boken (PP) - begynne å lese boken (NP) -  beginne på universitet (PP)  - begynne å studere på universitet (PP). Semantically universitet, if finding an interpretation, we do convert the object into a locative. 
-%cosa differente le espressioni per indicare iniziare il lavoro da qualche parte. begynne på Ikea - in ita iniziare da Ikea - non sempre necessario un'interpretazione completa.  
 
 \subsubsection{Sentences with direct objects} %from jespeen
 %% from Jespeen German beginnen and anfangen and Dutch beginnen only  handful of dirobj referring to concrete entities can be found. Verspoor found only a limited number of specific categories are used metonymically with English begin, Dutch and German appear to be even more restrictive in selecting concrete direct objects. In German almost all meto dir obj refer to stories or texts, all with an agentive interpretation (telling stories and writing pages). In addition, examples with beginning a piece of music, beginning a store/company (with agentive interpretation). The Dutch ANW-sample shows a resul with same categories. Telic interpretations very marginal. 
-
 %% from Jespeen in this subsetion, I will first discuss which concrete dirobj could be found in the corpus sample. Secondly, I will explain which types of prepositional objects occur with the above verbs. Results on prep obj will be discussed in full detail in the subsequent subsections.
-The verbs of initiation can also allow the combination with direct objects. The absolute and relative frequency of canonical sentences with the verbs \emph{begynne} and \emph{starte} are shown in Table X, divided by agentive and non-agentive subjects. The relative frequencies were normalized by comparing the instance occurrences with agentive subjects and the whole sample of the single verb followed by nouns.
-As observed, the verbs reached comparable outcomes. The former verb encompassed 5,747 occurrences with canonical constructions, in contrast, the latter verb included 23,526 sentences.
-Considering the distribution of verbs involving agentive and non-agentive subject, we can see that the verb \emph{begynne} encompasses 2,261 occurrences with agentive subjects covering 39\% of relative frequency, whereas \emph{starte} included 9,527 occurrences with around 39\% relative frequency. 
+The verbs of initiation can also introduce direct objects. The absolute and relative frequency of canonical sentences with the verbs \emph{begynne} and \emph{starte} are shown in Table X, divided by agentive and non-agentive subjects. The relative frequencies were normalized by comparing the instance occurrences with agentive subjects and the whole sample of the single verb followed by nouns.
+As observed, the verbs reached comparable outcomes. \emph{begynne} encompassed 5,747 occurrences with canonical constructions. In contrast, \emph{starte} verb occurred in 23,526 sentences.
+As for the occurrences of sentences with agentive subjects, we can notice that the verb \emph{begynne} occurs 2,261 times, covering 39\% of relative frequency, whereas \emph{starte} occurs in 9,527 sentence with around 39\% relative frequency. 
 % fare chi-square test.
-Despite the different sample sizes, it is interesting to notice that  the proportion of sentences featuring agentive subjects remains consistent across both verbs in frequency distribution, suggesting that initiation verbs are more commonly introduced by non-agentive subjects rather than agentive subjects which introduces an intention to begin an action. 
+Despite the different sample sizes, it is interesting to notice that the proportion of sentences featuring agentive subjects remains consistent across both verbs in frequency distribution. This suggests that initiation verbs are more commonly introduced by non-agentive subjects.
 
-Table~\ref{sentence_types} presents an overview of the annotated sentence occurrences divided by semantic categories for each verb with only agentive subejcts.
+Table~\ref{sentence_types} presents an overview of the annotated sentence occurrences divided by semantic classes for each verb with only agentive subejcts.
 \begin{table}[!]
     \centering
     \begin{tabular}{lrrrr}
@@ -649,11 +640,11 @@ Table~\ref{sentence_types} presents an overview of the annotated sentence occurr
     \caption{Table Caption Here}
     \label{tab:mytable}
 \end{table}
-Results reveal that the event-denoting arguments constitutes the more frequent type of argument for both initiation verbs, with 75\% of the occurrences for the verb \emph{begynne} and 34\% for \emph{starte}. 
+Results reveal that the event-denoting arguments constitute the most frequent type of argument for both initiation verbs, with 75\% of the occurrences for the verb \emph{begynne} and 34\% for \emph{starte}. 
 % A small sample of sentences occurs with temporal expressions after the predicate, with 339 for \emph{begynne} and 402 for \emph{starte}. The presence of adjuncts of the main clause is considered sentence adjunct and not relevant for our research purpose. 
 % A small sample of sentences are followed by temporal expressions, with 339 for \emph{begynne} ( and 402 for \emph{starte}.  
-A different situation is found with entity-denoting arguments. Their absolute frequency is relatively low, with 68 occurrences for \emph{begynne} and 791 for \emph{starte}, finding a consistent frequency proportion of 3\% between both verbs.
-A deeper analysis of these sentences uncovers that the use of entity-denoting arguments in canonical sentences is primarily employed for a non-coercive purpose. One of the main use of initiation verbs is to convey a sense that differs from the typical aspectual verb, like found, launch, transmit and create:
+A different situation is found with entity-denoting arguments. Their absolute frequency is relatively low, with 68 occurrences for \emph{begynne} and 791 for \emph{starte}, finding a consistent frequency proportion of 3\% in both verbs.
+A deeper analysis of these sentences uncovers that the use of entity-denoting arguments in syntactic canonical sentences is primarily employed for a non-coercive purpose. One of the main use of initiation verbs is to convey a sense that differs from the typical aspectual verb, like found, launch, transmit and create, as we show in~\ref{begin_noun1}. It is important to notice that, despite adhering to the compositional rules, such examples do not imply any case of coercion.
 %start contract
 % Et norsk firma med hovedkontor i Halden startet privat barnehage ved Svinesund, på svensk side fordi de har så mange svenske ansatte.
         \ea[]{ 
@@ -663,14 +654,12 @@ A deeper analysis of these sentences uncovers that the use of entity-denoting ar
         }\label{begin_noun1} %NCC
         \z
 
- 
-
-It is important to notice that, despite adhering to the compositional rules, do not imply any case of coercion, such expressions like the one above do not infer any case of coercion, as there is no covert event to be inferred.
 % begynne/starte + project classified as entity here. What to do? discuss about another section?
 %check comments4 CONTEXT MISSING
-Only 12? sentence with entity-denoting arguments are found as plausible candidate. The verb \emph{begynne} presents only instances, while 11? sentences with \emph{starte}. The argument types ranges from pure artifacts like for example books and articles: 
+Let us now look at sentences with entity-denoting arguments that are possible candidate of coercion. Only 12? sentences were found with the verb \emph{begynne}, while 11? sentences were found with \emph{starte}. The argument types range from concrete objects, such as books and articles, to more abstract entities. Examples are shown in~\ref{begin_noun2} and~\ref{starte_noun1}. Based on its previous context, the interpretation of the coercive argument found in~\ref{begin_noun2} is of agentive type, suggesting that the author is initiating an action of writing a diary about his garden activities. Similarly, in sentence~\ref{starte_noun1}
+ the subject started the action of creating or writing the ballad when he wrote to the politician Stoltenberg.
 
-        \ea \label{begin_noun1} %NCC
+        \ea \label{begin_noun2} %NCC
 
         \gll Poul Klingenberg d.e. begynte dagboka mens han var...\\
              Poul Klingenberg t.e. began diary-the while he was...\\
@@ -685,29 +674,17 @@ Only 12? sentence with entity-denoting arguments are found as plausible candidat
         \z
     
         % Hermansen startet balladen da han skrev til Jens Stoltenberg i fjor og ba ham gjøre « Ja, vi elsker » til offisiell nasjonalsang.
-    
- \noindent Based on its previous context, the interpretation of the metonymical argument found in example~\ref{begin_noun1} is of agentive type, suggesting that the author is initiating an action of writing a diary about his garden activities. Similarly Sentence~\ref{starte_noun1}
- the subject commenced the action of creating or writing the ballad when he wrote to the politician Stoltenberg. 
- A small subset of occurrences illustrates an argument composition where the main verb is followed by a noun and the preposition \emph{med}, imposing, as mentioned before, different interpretation constraints other than coercion. For that reason, such expressions must be discarded from the analysis.
-
-Only one sentence is found where a covert event infer building a structure:
+     
+ A small subset of occurrences illustrates an argument composition where the main verb is followed by a noun and the preposition \emph{med}, imposing, as mentioned before, different interpretation constraints other than coercion. For that reason, such expressions must be discarded from the analysis. Only one sentence was found where a covert event infer building a structure as shown in~\ref{begin_noun3}. There is no previous context to analyze. The sentence comes from a Wikipedia page\footnote{\url{https://no.wikipedia.org/wiki/26._juni}} that lists a series of fact happened June 26th ordered by year. The fact presented in the example above deals with an episode dated 1948. Apparently, the possible interpretation of covert event suggests that some NATO members are commencing to build an airlift against the Soviet Union for military purposes.
 % Vestmaktene startet luftbroen til Berlin etter at Sovjetunionen hadde innledet Berlinblokaden.
-        \ea \label{begin_noun2} %NCC
+        \ea \label{begin_noun3} %NCC
 
         \gll Vestmaktene startet luftbroen til Berlin etter at Sovjetunionen hadde innledet Berlinblokaden.\\
              West-power-the started airlift-the to Berlin after that Soviet-Union-the had initiated Berlin-blockade-the.\\
         \glt ‘The Western powers started (building) the airlift to Berlin after the Soviet Union had initiated the Berlin blockade.’
         \z
-There is no previous context to analyze. The sentence comes from a Wikipedia page\footnote{\url{https://no.wikipedia.org/wiki/26._juni}} that lists a series of fact happened June 26th ordered by year. The fact presented in the example above deals with an episode dated 1948. Apparently, the possible interpretation of covert event, suggests that some NATO members are commencing to build an airlift against the Soviet Union for military purposes.  
 
-Other coercion sentences combined with initiation verbs in transitive form can be found also with arguments that are not properly real artifacts, including for example starting:
-\begin{itemize}
-    \item  a set in a tennis match (å starte andresettet) 
-    \item  singing a song (å starte sangen)
-    \item  practicing a sport (å starte sport)
-    \item  playing a game (å starte tombola)
-\end{itemize}
-A comprehensive list of sentences is available in Appendix. 
+Other coercion sentences with initiation verbs in transitive form can be found also with arguments that are not properly real artifacts, including for example: a set in a tennis match (å starte andresettet); singing a song (å starte sangen); practicing a sport (å starte sport); playing a game (å starte tombola). A comprehensive list of sentences is available in Appendix. 
 %other sentences
 % - Djokovic startet andresettet litt tregt, men hevet seg noe.
 % -Marie N startet sangen iført en hvit dress og en hatt som en av danserne fjernet.
@@ -729,13 +706,9 @@ A comprehensive list of sentences is available in Appendix.
 %broadcast
 % 
  
- \subsection{discussion:paa vs med}
- The use of complement coercion with paa and med different. 
- paa used to mainlt express complement coercion. The prepositions seems focus on the arifact that undergoes the metonymy. The range of arguments remains restricted.    
+%  \subsect ting acceptability judgement.  
 
-med is more focused introducing a subset of a bigger event or a repetition. The focus apparently not on the object. Med also permits to extend the arguments allowed to complement coercion. Future work, is testing acceptability judgement.  
-
-\subsection{discussion:paa vs NP}
+% \subsection{discussion:paa vs NP}
 
 
     %starte bloggen/podkasten seems to denote more "dare il via a " vs starte paa bloggen.  pare non voglia introdurre un retrieval di CE. 
