@@ -38,9 +38,6 @@ This project provides scripts and tools for extracting sentences containing aspe
 ├── sentence_list_NCC/
 ```
 
-## License
-This project is licensed under the MIT License. See the `LICENSE` file for details.
-
 ## Acknowledgements
 - Special thanks to: 
 	- NTNU for permitting the accomplishment of this project. 
