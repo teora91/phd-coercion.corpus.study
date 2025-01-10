@@ -1,4 +1,4 @@
-# Aspectual Verbs Sentence Extractor
+# Norwegian Aspectual Verbs Sentence Extractor 1.0
 
 ## Description
 This project provides scripts and tools for extracting sentences containing aspectual verbs in Norwegian from the Norwegian Colossal Corpus (NCC).
