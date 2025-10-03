@@ -1,4 +1,4 @@
-# Norwegian Aspectual Verbs Sentence Extractor 1.0
+# Corpus Analysis on Complement Coercion in Norwegian: Aspectual Verbs Sentence Extractor + Extra Material
 
 ## Repository Scope
 This repository accompanies the material for a **paper currently under review**.  
